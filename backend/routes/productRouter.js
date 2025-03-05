@@ -1,4 +1,5 @@
 const express = require("express");
+const authenticate = require('../middleware/auth')
 const {
   getProducts,
   getProduct,
@@ -10,8 +11,12 @@ const {
 const router = express.Router();
 
 router.get("/", getProducts);
+router.get("/:jobId", getProduct)
+
+// Protected routes:
+router.use(authenticate)
+
 router.post("/", createProduct);
-router.get("/:jobId", getProduct);
 router.put("/:jobId", updateProduct);
 router.delete("/:jobId", deleteProduct);
 
